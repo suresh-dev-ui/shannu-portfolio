@@ -43,10 +43,6 @@ function typeRole() {
 
 typeRole();
 
-
-/* ---------- Mobile Navigation ---------- */
-
-
 /* ---------- Mobile Navigation ---------- */
 
 const nav = document.querySelector("nav");
@@ -56,29 +52,38 @@ if (nav && navList) {
     const menuButton = document.createElement("button");
 
     menuButton.className = "menu-toggle";
-    menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    menuButton.type = "button";
     menuButton.setAttribute("aria-label", "Toggle navigation");
     menuButton.setAttribute("aria-expanded", "false");
+    menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
 
     nav.insertBefore(menuButton, navList);
 
-    menuButton.addEventListener("click", () => {
-        const isOpen = navList.classList.toggle("active");
+    function closeMenu() {
+        navList.classList.remove("active");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }
 
-        menuButton.setAttribute("aria-expanded", String(isOpen));
-        menuButton.innerHTML = isOpen
-            ? '<i class="fa-solid fa-xmark"></i>'
-            : '<i class="fa-solid fa-bars"></i>';
+    menuButton.addEventListener("click", function () {
+        const isOpen = navList.classList.contains("active");
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            navList.classList.add("active");
+            menuButton.setAttribute("aria-expanded", "true");
+            menuButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        }
     });
 
-    navList.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            navList.classList.remove("active");
-            menuButton.setAttribute("aria-expanded", "false");
-            menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
-        });
+    navList.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
     });
 }
+
+
+
 
 /* ---------- Scroll Reveal ---------- */
 
