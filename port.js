@@ -46,34 +46,39 @@ typeRole();
 
 /* ---------- Mobile Navigation ---------- */
 
+
+/* ---------- Mobile Navigation ---------- */
+
 const nav = document.querySelector("nav");
 const navList = document.querySelector("nav ul");
 
-const menuButton = document.createElement("button");
-menuButton.className = "menu-toggle";
-menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
-menuButton.setAttribute("aria-label", "Toggle navigation");
-menuButton.setAttribute("aria-expanded", "false");
+if (nav && navList) {
+    const menuButton = document.createElement("button");
 
-nav.insertBefore(menuButton, navList);
+    menuButton.className = "menu-toggle";
+    menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    menuButton.setAttribute("aria-label", "Toggle navigation");
+    menuButton.setAttribute("aria-expanded", "false");
 
-menuButton.addEventListener("click", () => {
-    const isOpen = navList.classList.toggle("active");
+    nav.insertBefore(menuButton, navList);
 
-    menuButton.setAttribute("aria-expanded", String(isOpen));
-    menuButton.innerHTML = isOpen
-        ? '<i class="fa-solid fa-xmark"></i>'
-        : '<i class="fa-solid fa-bars"></i>';
-});
+    menuButton.addEventListener("click", () => {
+        const isOpen = navList.classList.toggle("active");
 
-navList.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-        navList.classList.remove("active");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.innerHTML = isOpen
+            ? '<i class="fa-solid fa-xmark"></i>'
+            : '<i class="fa-solid fa-bars"></i>';
     });
-});
 
+    navList.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            navList.classList.remove("active");
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        });
+    });
+}
 
 /* ---------- Scroll Reveal ---------- */
 
@@ -130,12 +135,4 @@ const footerText = document.querySelector("footer p");
 if (footerText) {
     footerText.textContent =
         `© ${new Date().getFullYear()} Shannu. Built with HTML and CSS.`;
-}
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
 }
