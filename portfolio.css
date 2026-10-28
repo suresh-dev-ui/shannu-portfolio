@@ -484,3 +484,38 @@ footer a {
         text-align: center;
     }
 }
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #38bdf8;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        position: relative;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+        background: #0f172a;
+        gap: 20px;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
